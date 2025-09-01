@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevProfile Insight</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DevProfile Insight</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Signup</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Evaluate Your Dev Profile Smarter</h1>
+        <p>
+            DevProfile Insight is an AI-powered system that evaluates your Resume & GitHub profile 
+            to match job roles. Get insights on relevance, code quality, tech stack, 
+            and GitHub activity to boost your hiring chances.
+        </p>
+        <button>Get Started</button>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Resume Relevance</h3>
+            <p>Check how well your resume matches the job description.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Code Quality</h3>
+            <p>Evaluate the readability and performance of your GitHub code.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Tech Stack Fit</h3>
+            <p>Find out if your skills align with the company’s requirements.</p>
+        </div>
+        <div class="feature-card">
+            <h3>GitHub Consistency</h3>
+            <p>Analyze your activity and contributions over time.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
