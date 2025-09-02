@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'devprofile_insight.urls'
+ROOT_URLCONF = 'DevProfile-Insight.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'devprofile_insight.wsgi.application'
+WSGI_APPLICATION = 'DevProfile-Insight.wsgi.application'
 
 
 # Database

@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'devprofile_insight.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DevProfile-Insight.settings')
 
 application = get_asgi_application()
