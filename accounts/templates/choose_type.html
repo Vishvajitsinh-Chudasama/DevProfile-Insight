@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - DevProfile Insight</title>
+    <link rel="stylesheet" href="{% static 'css/choose_type.css' %}">
+    <style>
+        /* Additional styling for choose type section */
+        .choose-type {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            color: white;
+            min-height: 80vh;
+        }
+        .choose-type h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        .user-type-btn {
+            padding: 15px 35px;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff9800;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .user-type-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.05);
+        }
+        .choose-type form {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DevProfile Insight</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Login</a></li>
+            <li class="{% if request.path == '/authentication/' %}active{% endif %}"><a href="#">Signup</a></li>
+        </ul>
+    </nav>
+
+    <section class="choose-type">
+        <h1>Select Your Account Type</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="user_type" value="personal" class="user-type-btn">Personal</button>
+            <button type="submit" name="user_type" value="company" class="user-type-btn">Company</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

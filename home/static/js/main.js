@@ -44,11 +44,4 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("🔑 Login functionality coming soon!");
         });
     }
-
-    if (signupLink) {
-        signupLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            alert("📝 Signup functionality coming soon!");
-        });
-    }
 });
