@@ -11,9 +11,9 @@
         <div class="logo">DevProfile Insight</div>
         <ul>
             <li class="{% if request.path == '/' %}active{% endif %}"><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Login</a></li>
-            <li class="{% if request.resolver_match.url_name == 'authentication' %}active{% endif %}"><a href="{% url 'authentication' %}">Signup</a></li>
+            <li><a href="{% url 'Features' %}">Features</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'authentication' %}">Signup</a></li>
         </ul>
     </nav>
 

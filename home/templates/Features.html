@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Features - DevProfile Insight</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Feature Page Extra Styling */
+        .feature-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to right, #1cc88a, #4e73df);
+            color: #fff;
+        }
+
+        .feature-header h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .feature-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .feature-section {
+            padding: 60px 40px;
+        }
+
+        .feature-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #4e73df;
+        }
+
+        .feature-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(78, 115, 223, 0.25);
+        }
+
+        .feature-box h3 {
+            margin-bottom: 10px;
+            color: #1cc88a;
+        }
+
+        .benefits-section {
+            background-color: #f9f9f9;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .benefit-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .benefit-box h4 {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">DevProfile Insight</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="#">Features</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'authentication' %}">Signup</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <section class="feature-header">
+        <h1>Features That Power Smarter Hiring</h1>
+        <p>DevProfile Insight combines AI and data analysis to evaluate resumes, GitHub profiles, 
+        and coding skills for both job seekers and recruiters.</p>
+    </section>
+
+    <!-- Feature Details -->
+    <section class="feature-section">
+        <h2>Core Features</h2>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h3>Resume Relevance</h3>
+                <p>AI evaluates if your resume matches the job role requirements, highlighting strengths and gaps.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Code Quality Check</h3>
+                <p>Analyzes your GitHub code for readability, structure, and performance to reflect real-world coding standards.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Tech Stack Suitability</h3>
+                <p>Identifies if your technical skills align with the company’s required stack and project needs.</p>
+            </div>
+            <div class="feature-box">
+                <h3>GitHub Consistency</h3>
+                <p>Monitors activity patterns, contribution history, and project ownership to assess developer consistency.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Role-Fit Score</h3>
+                <p>Generates a comprehensive score with personalized recommendations for improvement.</p>
+            </div>
+            <div class="feature-box">
+                <h3>AI Feedback Report</h3>
+                <p>Delivers actionable insights for both candidates and recruiters to improve hiring decisions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <h2>Who Benefits?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-box">
+                <h4>For Job Seekers</h4>
+                <p>Understand how well your profile fits a role, get improvement suggestions, and boost your hiring chances.</p>
+            </div>
+            <div class="benefit-box">
+                <h4>For Recruiters</h4>
+                <p>Quickly screen candidates with role-fit scores, saving time and improving hiring accuracy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

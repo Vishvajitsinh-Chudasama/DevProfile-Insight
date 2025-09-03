@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Personal Signup - DevProfile Insight</title>
+    <link rel="stylesheet" href="{% static 'css/choose_type.css' %}">
+    <style>
+        /* Form Inputs */
+        form input {
+            width: 300px;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        form input:focus {
+            outline: none;
+            border: 2px solid #ff9800;
+        }
+
+        .choose-type {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            color: white;
+            min-height: 80vh;
+        }
+
+        .choose-type h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .user-type-btn {
+            padding: 15px 35px;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff9800;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .user-type-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.05);
+        }
+
+        .choose-type form {
+            display: inline-block;
+        }
+
+        /* Error & Success Messages */
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .messages .error,
+        .field-error {
+            display: inline-block;
+            background-color: #ffe6e6;
+            color: #d9534f;
+            border: 1px solid #d43f3a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .messages .success {
+            display: inline-block;
+            background-color: #e6fff9;
+            color: #28a745;
+            border: 1px solid #1cc88a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">DevProfile Insight</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% static 'Features' %}">Features</a></li>
+            <li><a href="/authentication/login/">Login</a></li>
+            <li class="active"><a href="/authentication/">Signup</a></li>
+        </ul>
+    </nav>
+
+    <section class="choose-type">
+        <h1>Create Personal Account</h1>
+
+        <!-- Django Messages -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <p>
+                <input type="text" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}" required>
+                <br>
+                {% if form.username.errors %}
+                    <span class="field-error">{{ form.username.errors.0 }}</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <input type="email" name="email" placeholder="Email" value="{{ form.email.value|default:'' }}" required>
+                <br>
+                {% if form.email.errors %}
+                    <span class="field-error">{{ form.email.errors.0 }}</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <input type="text" name="phone_number" placeholder="Phone Number" value="{{ form.phone_number.value|default:'' }}" required>
+                <br>
+                {% if form.phone_number.errors %}
+                    <span class="field-error">{{ form.phone_number.errors.0 }}</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <input type="password" name="password1" placeholder="Password" required>
+                <br>
+                {% if form.password1.errors %}
+                    <span class="field-error">{{ form.password1.errors.0 }}</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <input type="password" name="password2" placeholder="Confirm Password" required>
+                <br>
+                {% if form.password2.errors %}
+                    <span class="field-error">{{ form.password2.errors.0 }}</span>
+                {% endif %}
+            </p>
+
+            <button type="submit" class="user-type-btn">Sign Up</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

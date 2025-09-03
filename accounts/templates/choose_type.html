@@ -43,8 +43,8 @@
         <div class="logo">DevProfile Insight</div>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="{% static 'Features' %}">Features</a></li>
+            <li><a href="{% static 'login' %}">Login</a></li>
             <li class="{% if request.path == '/authentication/' %}active{% endif %}"><a href="#">Signup</a></li>
         </ul>
     </nav>

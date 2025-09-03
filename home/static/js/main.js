@@ -38,10 +38,4 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginLink = navLinks[2];  // 3rd link
     const signupLink = navLinks[3]; // 4th link
 
-    if (loginLink) {
-        loginLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            alert("🔑 Login functionality coming soon!");
-        });
-    }
 });
