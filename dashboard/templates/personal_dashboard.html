@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – DevProfile Insight</title>
+    <link rel="stylesheet" href="{% static 'css/personal_dashboard.css' %}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">DevProfile Insight</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Welcome, {{ user.username }} 👋</h1>
+                <p>Complete your profile to unlock personalized resume analysis and GitHub insights.</p>
+            </div>
+        </section>
+
+        <section class="dashboard-content">
+            <div class="container">
+                <div class="profile-setup card">
+                    <h2>Profile Setup</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Save Profile</button>
+                    </form>
+                </div>
+
+                {% if analysis %}
+                <div class="results-grid">
+                    <div class="card score-card">
+                        <h3>Resume Score</h3>
+                        <p class="score">{{ analysis.score }}%</p>
+                        <p>{{ analysis.recommendations }}</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Strengths</h3>
+                        <pre>{{ analysis.strengths }}</pre>
+                    </div>
+
+                    <div class="card">
+                        <h3>Weaknesses</h3>
+                        <pre>{{ analysis.weaknesses }}</pre>
+                    </div>
+
+                    <div class="card github-summary">
+                        <h3>GitHub Summary</h3>
+                        <pre>{{ analysis.github_summary }}</pre>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 DevProfile Insight. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -17,8 +17,7 @@ def personal_signup(request):
     if request.method == "POST":
         form = PersonalSignupForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Your personal account has been created successfully!")
+            form.save()            
             return redirect("login")
         else:
             messages.error(request, "Please correct the errors below.")
@@ -32,7 +31,6 @@ def company_signup(request):
         form = CompanySignupForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your company account has been created successfully!")
             return redirect("login")
         else:
             messages.error(request, "Please correct the errors below.")

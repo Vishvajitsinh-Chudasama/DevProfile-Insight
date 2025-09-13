@@ -99,7 +99,7 @@
         <div class="logo">DevProfile Insight</div>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="{% static 'Features' %}">Features</a></li>
+            <li><a href="{% url 'Features' %}">Features</a></li>
             <li class="active"><a href="/authentication/login/">Login</a></li>
             <li><a href="/authentication/">Signup</a></li>
         </ul>
@@ -116,7 +116,7 @@
             {% endfor %}
             <form method="post">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" class="login-btn">Login</button>
             </form>
