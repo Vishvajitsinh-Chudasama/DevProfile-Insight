@@ -1,192 +1,263 @@
-/* General Reset and Mobile-First Styles */
+:root {
+    --white: #ffffff;
+    --off-white: #fcfcfd;
+    --border: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent: #2563eb;
+    --accent-soft: #eff6ff;
+    --warning: #ef4444;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
+    font-family: var(--sans);
+    background-color: var(--white);
+    color: var(--text-primary);
+    line-height: 1.5;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
+/* Background Grid Pattern */
+.blueprint-grid {
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+/* Header Alignment */
+.system-header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 0 2rem;
+}
+
+.nav-container {
+    max-width: 1400px;
     margin: 0 auto;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #222;
-    color: #fff;
-    padding: 1rem 0;
-}
-
-.navbar .container {
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.navbar .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+.brand-id {
+    font-family: var(--mono);
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
 }
 
-.navbar nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+.nav-link {
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-left: 2rem;
+}
+
+.nav-link.active { color: var(--text-primary); }
+
+/* Dashboard Layout */
+.dashboard-wrapper {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Content Boxes (Cards) */
+.content-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.box-label {
+    position: absolute;
+    top: -1px;
+    right: 20px;
+    background: var(--text-primary);
+    color: white;
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 8px;
+}
+
+/* Sidebar/Form Alignment */
+.sidebar-panel h3 { margin-top: 0; font-size: 1.25rem; }
+.small-text { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+.system-form p { margin-bottom: 1rem; }
+.system-form input, .system-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.system-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: var(--sans);
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-family: var(--mono);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Main Display Grid */
+.display-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
 
-.navbar nav a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s;
-}
-
-.navbar nav a.active,
-.navbar nav a:hover {
-    color: #ff9800;
-}
-
-/* Hero Section */
-.hero {
+.score-box {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 4rem 0;
-    background: linear-gradient(to right, #4e73df, #1cc88a);
-    color: white;
 }
 
-.hero h1 {
-    font-size: 2.5rem;
+.score-display {
+    margin: 1rem 0;
+    display: flex;
+    align-items: baseline;
+}
+
+.score-display .value { font-size: 2rem; font-weight: 100; line-height: 1.2; color: var(--accent); }
+.score-display .percent { font-size: 1.5rem; font-weight: 600; color: var(--text-secondary); }
+
+.status-bar {
+    width: 100%;
+    max-width: 400px;
+    height: 6px;
+    background: var(--accent-soft);
+    border-radius: 10px;
+    overflow: hidden;
     margin-bottom: 1rem;
 }
 
-.hero p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
+.status-bar .fill {
+    height: 100%;
+    background: var(--accent);
 }
 
-/* Dashboard Content */
-.dashboard-content {
-    padding: 2rem 0;
+/* Terminal/Log Text */
+.terminal-text {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    font-family: var(--mono);
+    font-size: 13px;
+    height: 180px;
+    overflow-y: auto;
+    white-space: pre-wrap;
 }
 
-.card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+.terminal-text.warning { border-left: 3px solid var(--warning); color: #851e1e; }
+
+.wide-box { grid-column: span 2; }
+.wide-box .terminal-text { height: 250px; }
+.single-column-grid {
+    grid-template-columns: 1fr;
 }
 
-.card h2, .card h3 {
-    margin-top: 0;
-    color: #4e73df;
+.jobs-box {
+    margin-top: 1.5rem;
 }
 
-/* Profile Setup Form */
-.profile-setup form {
-    display: flex;
-    flex-direction: column;
+.jobs-list {
+    display: grid;
     gap: 1rem;
 }
 
-.profile-setup form p {
-    margin: 0;
-}
-
-.profile-setup label {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    display: block;
-}
-
-.profile-setup input[type="file"],
-.profile-setup input[type="text"],
-.profile-setup select {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.profile-setup button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #4e73df;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    align-self: flex-start;
-}
-
-.profile-setup button:hover {
-    background-color: #1cc88a;
-}
-
-/* Results Grid */
-.results-grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.score-card .score {
-    /* font-size: 3rem; */
-    font-weight: bold;
-    color: #1cc88a;
-    margin: 0.5rem 0;
-}
-
-.github-summary {
-    grid-column: 1 / -1; /* Make this card span the full width initially */
-}
-
-pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    background-color: #f4f4f4;
+.job-item {
+    border: 1px solid var(--border);
+    background: var(--off-white);
     padding: 1rem;
-    border-radius: 6px;
+}
+
+.job-item h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.compact-form {
+    margin-top: 0.75rem;
+}
+
+.applied-btn {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+.delete-btn {
+    background: #b91c1c;
+}
+
+.delete-btn:hover {
+    background: #991b1b;
+}
+
+.status-msg {
+    margin-bottom: 1rem;
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+.applicant-card {
+    height: auto;
+    margin-bottom: 1rem;
 }
 
 /* Footer */
-.footer {
-    background-color: #222;
-    color: #fff;
-    text-align: center;
+.system-footer {
+    border-top: 1px solid var(--border);
     padding: 1.5rem 0;
-    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-secondary);
 }
 
-/* Responsive Styles for Larger Screens */
-@media (min-width: 768px) {
-    .results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.ticker { float: right; }
+
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+    .dashboard-wrapper { grid-template-columns: 1fr; }
+    .sidebar-panel { order: 2; }
+    .main-display { order: 1; }
 }
 
-@media (min-width: 1024px) {
-    .dashboard-content .container {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 2rem;
-        align-items: start;
-    }
-
-    .profile-setup {
-        position: sticky;
-        top: 2rem;
-    }
-
-    .results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+@media (max-width: 700px) {
+    .display-grid { grid-template-columns: 1fr; }
+    .score-box, .wide-box { grid-column: span 1; }
 }

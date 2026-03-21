@@ -1,66 +1,169 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - DevProfile Insight</title>
-    <link rel="stylesheet" href="{% static 'css/choose_type.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        /* Additional styling for choose type section */
-        .choose-type {
+        /* Selection Terminal Styling */
+        .selection-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px);
+            padding: 2rem;
+        }
+
+        .selection-header {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(to right, #4e73df, #1cc88a);
-            color: white;
-            min-height: 80vh;
+            margin-bottom: 3rem;
         }
-        .choose-type h1 {
-            font-size: 36px;
-            margin-bottom: 30px;
+
+        .selection-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 0.5rem;
         }
-        .user-type-btn {
-            padding: 15px 35px;
-            margin: 15px;
-            border: none;
-            border-radius: 8px;
-            background-color: #ff9800;
-            color: #fff;
-            font-size: 18px;
+
+        .protocol-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 320px);
+            gap: 2rem;
+        }
+
+        .type-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .user-type-btn:hover {
-            background-color: #e68900;
-            transform: scale(1.05);
+
+        .type-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
-        .choose-type form {
-            display: inline-block;
+
+        .type-card h2 {
+            font-family: var(--mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .type-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            min-height: 3rem;
+        }
+
+        .hidden-radio {
+            display: none;
+        }
+
+        /* Digital Button inside Card */
+        .select-btn {
+            background: none;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 10px 24px;
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .type-card:hover .select-btn {
+            background: var(--text-primary);
+            color: var(--white);
+        }
+
+        .card-id {
+            position: absolute;
+            top: -1px;
+            left: 20px;
+            background: var(--text-primary);
+            color: white;
+            font-family: var(--mono);
+            font-size: 9px;
+            padding: 2px 8px;
+        }
+
+        @media (max-width: 768px) {
+            .type-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="blueprint-grid"></div>
 
-    <nav>
-        <div class="logo">DevProfile Insight</div>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'Features' %}">Features</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li class="{% if request.path == '/authentication/' %}active{% endif %}"><a href="#">Signup</a></li>
-        </ul>
-    </nav>
+    <header class="system-header">
+        <div class="nav-container">
+            <div class="brand-id">SYSTEM://DEV_INSIGHT</div>
+            <nav class="action-links">
+                <ul>
+                    <li><a href="/" class="nav-link">HOME</a></li>
+                    <li><a href="{% url 'Features' %}" class="nav-link">FEATURES</a></li>
+                    <li><a href="{% url 'login' %}" class="nav-link">LOGIN</a></li>
+                    <li class="active"><a href="#" class="nav-link highlight">SIGNUP_INIT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <section class="choose-type">
-        <h1>Select Your Account Type</h1>
-        <form method="post">
+    <main class="selection-container">
+        <div class="selection-header">
+            <span class="protocol-label">// ACCOUNT_INITIALIZATION</span>
+            <h1>Select Your Access Type</h1>
+        </div>
+
+        <form method="post" class="type-grid">
             {% csrf_token %}
-            <button type="submit" name="user_type" value="personal" class="user-type-btn">Personal</button>
-            <button type="submit" name="user_type" value="company" class="user-type-btn">Company</button>
+            
+            <button type="submit" name="user_type" value="personal" class="type-card">
+                <div class="card-id">MODE_01</div>
+                <h2>PERSONAL</h2>
+                <p>For developers seeking profile analysis and GitHub insights.</p>
+                <div class="select-btn">SELECT_PROXIMITY</div>
+            </button>
+
+            <button type="submit" name="user_type" value="company" class="type-card">
+                <div class="card-id">MODE_02</div>
+                <h2>COMPANY</h2>
+                <p>For recruiters and agencies seeking to analyze candidate streams.</p>
+                <div class="select-btn">SELECT_PROXIMITY</div>
+            </button>
         </form>
-    </section>
+    </main>
 
-    <footer>
-        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    <footer class="system-footer">
+        <div class="nav-container">
+            <p>© 2025 // DEVPROFILE_INSIGHT // ACCESS_CONTROL</p>
+            <span class="ticker">● READY_FOR_SIGNUP</span>
+        </div>
     </footer>
-
 </body>
 </html>

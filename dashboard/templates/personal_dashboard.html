@@ -4,76 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard – DevProfile Insight</title>
+    <title>DevProfile // System Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/personal_dashboard.css' %}">
 </head>
 <body>
+    <div class="blueprint-grid"></div>
 
-    <header class="navbar">
-        <div class="container">
-            <div class="logo">DevProfile Insight</div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Dashboard</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
+    <header class="system-header">
+        <div class="nav-container">
+            <div class="brand-id">SYSTEM://DEV_INSIGHT</div>
+            <nav class="action-links">
+                <a href="#" class="nav-link active">feature</a>
+                <a href="{% url 'login' %}" class="nav-link">logout</a>
+                <!-- <a href="#" class="logout-link">logout</a> -->
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Welcome, {{ user.username }} 👋</h1>
-                <p>Complete your profile to unlock personalized resume analysis and GitHub insights.</p>
+    <main class="dashboard-wrapper">
+        <section class="sidebar-panel">
+            <div class="content-box">
+                <div class="box-label">INPUT_MODULE</div>
+                <h3>Profile Setup</h3>
+                <p class="small-text">Initialize your data stream by filling the fields below.</p>
+                
+                <form method="post" enctype="multipart/form-data" class="system-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="run_analysis">
+                    <div class="form-scroll-area">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="submit-btn">EXECUTE_ANALYSIS</button>
+                </form>
+            </div>
+
+            <div class="content-box jobs-box">
+                <div class="box-label">OPEN_POSITIONS</div>
+                <h3>Apply to Company Roles</h3>
+                <p class="small-text">Live opportunities published by company profiles.</p>
+                <div class="jobs-list">
+                    {% for job in open_jobs %}
+                    <div class="job-item">
+                        <h4>{{ job.title }}</h4>
+                        <p><strong>Company:</strong> {{ job.company.company_name|default:job.company.username }}</p>
+                        <p>{{ job.description }}</p>
+                        {% if job.required_skills %}
+                        <p><strong>Skills:</strong> {{ job.required_skills }}</p>
+                        {% endif %}
+                        <p><strong>Location:</strong> {{ job.location|default:"Not specified" }}</p>
+                        {% if job.id in applied_job_ids %}
+                            <button class="submit-btn applied-btn" disabled>ALREADY_APPLIED</button>
+                        {% else %}
+                            <form method="post" enctype="multipart/form-data" class="system-form compact-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="apply_job">
+                                <input type="hidden" name="job_id" value="{{ job.id }}">
+                                Resume:
+                                {{ application_form.resume }}
+                                Github Username:
+                                {{ application_form.github_username }}
+                                <button type="submit" class="submit-btn">APPLY_NOW</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    <p class="small-text">No active positions available right now.</p>
+                    {% endfor %}
+                </div>
             </div>
         </section>
 
-        <section class="dashboard-content">
-            <div class="container">
-                <div class="profile-setup card">
-                    <h2>Profile Setup</h2>
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Save Profile</button>
-                    </form>
+        <section class="main-display">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="content-box status-msg">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% if analysis %}
+            <div class="display-grid">
+                
+                <div class="content-box score-box">
+                    <div class="box-label">METRIC_01</div>
+                    <h4>RESUME_QUALITY_SCORE</h4>
+                    <div class="score-display">
+                        <span class="value">{{ analysis.score }}</span>
+                        <!-- <span class="percent">%</span> -->
+                    </div>
+                    <div class="status-bar"><div class="fill" style="width: {{ analysis.score }}%"></div></div>
+                    <p class="recommendation">{{ analysis.recommendations }}</p>
                 </div>
 
-                {% if analysis %}
-                <div class="results-grid">
-                    <div class="card score-card">
-                        <h3>Resume Score</h3>
-                        <p class="score">{{ analysis.score }}%</p>
-                        <p>{{ analysis.recommendations }}</p>
-                    </div>
-
-                    <div class="card">
-                        <h3>Strengths</h3>
-                        <pre>{{ analysis.strengths }}</pre>
-                    </div>
-
-                    <div class="card">
-                        <h3>Weaknesses</h3>
-                        <pre>{{ analysis.weaknesses }}</pre>
-                    </div>
-
-                    <div class="card github-summary">
-                        <h3>GitHub Summary</h3>
-                        <pre>{{ analysis.github_summary }}</pre>
-                    </div>
+                <div class="content-box log-box">
+                    <div class="box-label">LOG_02: STRENGTHS</div>
+                    <div class="terminal-text">{{ analysis.strengths }}</div>
                 </div>
-                {% endif %}
+
+                <div class="content-box log-box">
+                    <div class="box-label">LOG_03: VULNERABILITIES</div>
+                    <div class="terminal-text warning">{{ analysis.weaknesses }}</div>
+                </div>
+
+                <div class="content-box wide-box">
+                    <div class="box-label">DATA_04: GITHUB_INTELLIGENCE_FEED</div>
+                    <div class="terminal-text">{{ analysis.github_summary }}</div>
+                </div>
             </div>
+            {% else %}
+            <div class="placeholder-box">
+                <div class="loading-spinner"></div>
+                <p>SYSTEM_IDLE: AWAITING_DATA_UPLOAD</p>
+            </div>
+            {% endif %}
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    <footer class="system-footer">
+        <div class="nav-container">
+            <span>STABLE_VERSION_2.0.5</span>
+            <span class="ticker">● SYSTEM_ONLINE // 2025 // ENCRYPTED_CHANNEL</span>
         </div>
     </footer>
-
 </body>
 </html>

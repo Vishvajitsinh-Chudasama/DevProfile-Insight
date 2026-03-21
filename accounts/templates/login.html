@@ -1,137 +1,181 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - DevProfile Insight</title>
-    <link rel="stylesheet" href="{% static 'css/choose_type.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        /* Login Section */
-        .login-section {
+        /* Auth Module Specifics */
+        .auth-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
-            background: linear-gradient(to right, #4e73df, #1cc88a);
-            color: white;
+            min-height: calc(100vh - 160px); /* Adjust for header/footer */
+            padding: 2rem;
         }
 
-        .login-box {
-            background: white;
-            color: #333;
-            padding: 40px 30px;
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            width: 350px;
-            text-align: center;
+        .auth-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 400px;
+            padding: 3rem 2.5rem;
+            position: relative;
         }
 
-        .login-box h2 {
-            margin-bottom: 20px;
-            color: #4e73df;
+        .auth-box h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
         }
 
-        .login-box input {
-            width: 90%;
-            padding: 12px 15px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            background: #f1f1f1;
+        .auth-sub {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            display: block;
         }
 
-        .login-box input:focus {
+        .input-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .system-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            font-family: var(--sans);
+            font-size: 14px;
+            transition: border-color 0.2s;
+            background: #fafafa;
+        }
+
+        .system-input:focus {
             outline: none;
-            border: 2px solid #ff9800;
+            border-color: var(--accent);
+            background: var(--white);
         }
 
         .login-btn {
             width: 100%;
-            padding: 12px;
-            background: #ff9800;
-            color: white;
+            background: var(--text-primary);
+            color: var(--white);
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
+            padding: 14px;
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 13px;
             cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.3s ease, transform 0.2s;
+            margin-top: 1rem;
+            transition: 0.3s;
         }
 
         .login-btn:hover {
-            background: #e68900;
-            transform: scale(1.03);
+            background: var(--accent);
         }
 
-        .extra-links {
-            margin-top: 15px;
-            font-size: 14px;
+        .auth-footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border);
+            font-size: 13px;
+            text-align: center;
         }
 
-        .extra-links a {
-            color: #4e73df;
+        .auth-footer a {
+            color: var(--accent);
             text-decoration: none;
+            font-weight: 600;
         }
 
-        .extra-links a:hover {
-            text-decoration: underline;
+        .auth-footer p {
+            margin-bottom: 0.5rem;
         }
 
-        .alert {
-            display: inline-block;
-            background-color: #ffe6e6;
-            color: #d9534f;
-            border: 1px solid #d43f3a;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-top: 5px;
-            font-size: 14px;
-            font-weight: 500;
+        /* Error Message Style */
+        .alert-module {
+            background: #fff5f5;
+            border-left: 3px solid #f87171;
+            padding: 10px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: #991b1b;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
 
 <body>
+    <div class="blueprint-grid"></div>
 
-    <!-- Navbar -->
-    <nav>
-        <div class="logo">DevProfile Insight</div>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'Features' %}">Features</a></li>
-            <li class="active"><a href="/authentication/login/">Login</a></li>
-            <li><a href="/authentication/">Signup</a></li>
-        </ul>
-    </nav>
+    <header class="system-header">
+        <div class="nav-container">
+            <div class="brand-id">SYSTEM://DEV_INSIGHT</div>
+            <nav class="action-links">
+                <ul>
+                    <li><a href="/" class="nav-link">HOME</a></li>
+                    <li><a href="{% url 'Features' %}" class="nav-link">FEATURES</a></li>
+                    <li class="active"><a href="#" class="nav-link">LOGIN</a></li>
+                    <li><a href="/authentication/" class="nav-link highlight">SIGNUP_INIT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Login Section -->
-    <section class="login-section">
-        <div class="login-box">
+    <main class="auth-container">
+        <div class="auth-box">
+            <div class="box-label">AUTH_GATE_01</div>
             <h2>Login</h2>
-            {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                {{ message }}
-            </div>
-            {% endfor %}
+            <span class="auth-sub">INITIALIZING_SESSION_PROTOCOL...</span>
+
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert-module">
+                    > ERROR: {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+
             <form method="post">
                 {% csrf_token %}
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit" class="login-btn">Login</button>
+                <div class="input-group">
+                    <label>USER_IDENTIFIER</label>
+                    <input type="text" name="username" class="system-input" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <label>SECURITY_KEY</label>
+                    <input type="password" name="password" class="system-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login-btn">EXECUTE_LOGIN</button>
             </form>
-            <div class="extra-links">
-                <p>Don't have an account? <a href="/authentication/">Sign up</a></p>
-                <p><a href="#">Forgot Password?</a></p>
+
+            <div class="auth-footer">
+                <p>New operator? <a href="/authentication/">Register Profile</a></p>
+                <p><a href="#" style="font-size: 11px; color: var(--text-secondary);">Recovery: Forgot Security Key?</a></p>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    <footer class="system-footer">
+        <div class="nav-container">
+            <p>© 2025 // DEVPROFILE_INSIGHT // ACCESS_CONTROL</p>
+            <span class="ticker">● ENCRYPTION_ACTIVE</span>
+        </div>
     </footer>
 
 </body>
-
 </html>

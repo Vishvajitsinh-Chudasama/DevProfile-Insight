@@ -1,55 +1,84 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DevProfile Insight</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevProfile Insight // Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <div class="blueprint-grid"></div>
 
-    <nav>
-        <div class="logo">DevProfile Insight</div>
-        <ul>
-            <li class="{% if request.path == '/' %}active{% endif %}"><a href="#">Home</a></li>
-            <li><a href="{% url 'Features' %}">Features</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'authentication' %}">Signup</a></li>
-        </ul>
-    </nav>
+    <header class="system-header">
+        <div class="nav-container">
+            <div class="brand-id">SYSTEM://DEV_INSIGHT</div>
+            <nav class="action-links">
+                <ul>
+                    <li class="{% if request.path == '/' %}active{% endif %}"><a href="#" class="nav-link">HOME</a></li>
+                    <li><a href="{% url 'Features' %}" class="nav-link">FEATURES</a></li>
+                    <li><a href="{% url 'login' %}" class="nav-link">LOGIN</a></li>
+                    <li><a href="{% url 'authentication' %}" class="nav-link highlight">SIGNUP_INIT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <section class="hero">
-        <h1>Evaluate Your Dev Profile Smarter</h1>
-        <p>
-            DevProfile Insight is an AI-powered system that evaluates your Resume & GitHub profile 
-            to match job roles. Get insights on relevance, code quality, tech stack, 
-            and GitHub activity to boost your hiring chances.
-        </p>
-        <button>Get Started</button>
-    </section>
+    <main class="landing-content">
+        <section class="hero-module">
+            <div class="module-label">CORE_INTERFACE</div>
+            <div class="hero-inner">
+                <h1 class="glitch-text">Evaluate Your Dev Profile <span class="accent">Smarter</span></h1>
+                <p class="hero-sub">
+                    AI-powered evaluation system for Resume & GitHub profile synchronization. 
+                    Get real-time insights on code quality, tech stack alignment, and activity consistency.
+                </p>
+                <div class="hero-actions">
+                    <button class="primary-btn">INITIALIZE_GET_STARTED</button>
+                    <span class="system-tag">v2.0.5 Ready</span>
+                </div>
+            </div>
+        </section>
 
-    <section class="features">
-        <div class="feature-card">
-            <h3>Resume Relevance</h3>
-            <p>Check how well your resume matches the job description.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Code Quality</h3>
-            <p>Evaluate the readability and performance of your GitHub code.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Tech Stack Fit</h3>
-            <p>Find out if your skills align with the company’s requirements.</p>
-        </div>
-        <div class="feature-card">
-            <h3>GitHub Consistency</h3>
-            <p>Analyze your activity and contributions over time.</p>
-        </div>
-    </section>
+        <section class="features-grid">
+            <div class="content-box">
+                <div class="box-label">LOG_01</div>
+                <h3>Resume Relevance</h3>
+                <p>Check how well your resume matches specific job description coefficients.</p>
+                <div class="box-footer">SCANNING_ACTIVE</div>
+            </div>
 
-    <footer>
-        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+            <div class="content-box">
+                <div class="box-label">LOG_02</div>
+                <h3>Code Quality</h3>
+                <p>Evaluate the readability, complexity, and performance of your code repositories.</p>
+                <div class="box-footer">ANALYSIS_READY</div>
+            </div>
+
+            <div class="content-box">
+                <div class="box-label">LOG_03</div>
+                <h3>Tech Stack Fit</h3>
+                <p>Verify skill alignment with specific company technical requirements.</p>
+                <div class="box-footer">MATCHING_SERVICE</div>
+            </div>
+
+            <div class="content-box">
+                <div class="box-label">LOG_04</div>
+                <h3>GitHub Consistency</h3>
+                <p>Analyze contribution frequency and repository maintenance history.</p>
+                <div class="box-footer">HISTORY_LOG</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="system-footer">
+        <div class="nav-container">
+            <p>© 2025 // DEVPROFILE_INSIGHT // DATA_PORTAL_SECURED</p>
+            <span class="ticker">● ALL_SYSTEMS_OPERATIONAL</span>
+        </div>
     </footer>
-    <script src="{% static 'js/main.js' %}"></script>
 
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

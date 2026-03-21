@@ -1,167 +1,156 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Signup - DevProfile Insight</title>
-    <link rel="stylesheet" href="{% static 'css/choose_type.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        /* Form Inputs */
-        form input {
-            width: 300px;
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px);
+            padding: 3rem 1rem;
+        }
+        .auth-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem 2.5rem;
+            position: relative;
+        }
+        .auth-box h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+        .protocol-sub {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+        .input-row { margin-bottom: 1.25rem; }
+        .input-row label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        .system-input {
+            width: 100%;
             padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
+            border: 1px solid var(--border);
+            font-family: var(--sans);
+            font-size: 14px;
+            background: #fafafa;
+            transition: 0.2s;
         }
-
-        form input:focus {
+        .system-input:focus {
             outline: none;
-            border: 2px solid #ff9800;
+            border-color: var(--accent);
+            background: var(--white);
         }
-
-        .choose-type {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(to right, #4e73df, #1cc88a);
-            color: white;
-            min-height: 80vh;
-        }
-
-        .choose-type h1 {
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
-
-        .user-type-btn {
-            padding: 15px 35px;
-            margin: 15px;
-            border: none;
-            border-radius: 8px;
-            background-color: #ff9800;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-
-        .user-type-btn:hover {
-            background-color: #e68900;
-            transform: scale(1.05);
-        }
-
-        .choose-type form {
-            display: inline-block;
-        }
-
-        /* Error & Success Messages */
-        .messages {
-            margin-bottom: 20px;
-        }
-
-        .messages .error,
         .field-error {
-            display: inline-block;
-            background-color: #ffe6e6;
-            color: #d9534f;
-            border: 1px solid #d43f3a;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-top: 5px;
-            font-size: 14px;
-            font-weight: 500;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: #ef4444;
+            margin-top: 4px;
+            display: block;
         }
-
-        .messages .success {
-            display: inline-block;
-            background-color: #e6fff9;
-            color: #28a745;
-            border: 1px solid #1cc88a;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-weight: 500;
+        .submit-btn {
+            width: 100%;
+            background: var(--text-primary);
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            font-family: var(--mono);
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1.5rem;
+        }
+        .submit-btn:hover { background: var(--accent); }
+        .alert-msg {
+            background: #eff6ff;
+            border-left: 3px solid var(--accent);
+            padding: 10px;
+            font-family: var(--mono);
+            font-size: 11px;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
-
 <body>
+    <div class="blueprint-grid"></div>
 
-    <nav>
-        <div class="logo">DevProfile Insight</div>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'Features' %}">Features</a></li>
-            <li><a href="/authentication/login/">Login</a></li>
-            <li class="active"><a href="/authentication/">Signup</a></li>
-        </ul>
-    </nav>
+    <header class="system-header">
+        <div class="nav-container">
+            <div class="brand-id">SYSTEM://DEV_INSIGHT</div>
+            <nav class="action-links">
+                <ul>
+                    <li><a href="/" class="nav-link">HOME</a></li>
+                    <li><a href="{% url 'Features' %}" class="nav-link">FEATURES</a></li>
+                    <li><a href="/authentication/login/" class="nav-link">LOGIN</a></li>
+                    <li class="active"><a href="#" class="nav-link highlight">SIGNUP_INIT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <section class="choose-type">
-        <h1>Create Personal Account</h1>
+    <main class="auth-container">
+        <div class="auth-box">
+            <div class="box-label">REG_MODULE_P</div>
+            <h1>Create Personal Account</h1>
+            <span class="protocol-sub">ESTABLISHING_USER_PROXIMITY...</span>
 
-        <!-- Django Messages -->
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <p class="{{ message.tags }}">{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
+            {% if messages %}
+                <div class="alert-msg">
+                    {% for message in messages %} > {{ message }}{% endfor %}
+                </div>
+            {% endif %}
 
-        <form method="post">
-            {% csrf_token %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-row">
+                    <label>IDENTIFIER_NAME</label>
+                    <input type="text" name="username" class="system-input" placeholder="Username" value="{{ form.username.value|default:'' }}" required>
+                    {% if form.username.errors %}<span class="field-error">{{ form.username.errors.0 }}</span>{% endif %}
+                </div>
+                <div class="input-row">
+                    <label>COMM_EMAIL</label>
+                    <input type="email" name="email" class="system-input" placeholder="email@domain.com" value="{{ form.email.value|default:'' }}" required>
+                    {% if form.email.errors %}<span class="field-error">{{ form.email.errors.0 }}</span>{% endif %}
+                </div>
+                <div class="input-row">
+                    <label>CONTACT_HEX</label>
+                    <input type="text" name="phone_number" class="system-input" placeholder="+1..." value="{{ form.phone_number.value|default:'' }}" required>
+                </div>
+                <div class="input-row">
+                    <label>SECURITY_KEY_ALPHA</label>
+                    <input type="password" name="password1" class="system-input" placeholder="••••••••" required>
+                </div>
+                <div class="input-row">
+                    <label>SECURITY_KEY_VERIFY</label>
+                    <input type="password" name="password2" class="system-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="submit-btn">EXECUTE_REGISTRATION</button>
+            </form>
+        </div>
+    </main>
 
-            <p>
-                <input type="text" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}" required>
-                <br>
-                {% if form.username.errors %}
-                    <span class="field-error">{{ form.username.errors.0 }}</span>
-                {% endif %}
-            </p>
-
-            <p>
-                <input type="email" name="email" placeholder="Email" value="{{ form.email.value|default:'' }}" required>
-                <br>
-                {% if form.email.errors %}
-                    <span class="field-error">{{ form.email.errors.0 }}</span>
-                {% endif %}
-            </p>
-
-            <p>
-                <input type="text" name="phone_number" placeholder="Phone Number" value="{{ form.phone_number.value|default:'' }}" required>
-                <br>
-                {% if form.phone_number.errors %}
-                    <span class="field-error">{{ form.phone_number.errors.0 }}</span>
-                {% endif %}
-            </p>
-
-            <p>
-                <input type="password" name="password1" placeholder="Password" required>
-                <br>
-                {% if form.password1.errors %}
-                    <span class="field-error">{{ form.password1.errors.0 }}</span>
-                {% endif %}
-            </p>
-
-            <p>
-                <input type="password" name="password2" placeholder="Confirm Password" required>
-                <br>
-                {% if form.password2.errors %}
-                    <span class="field-error">{{ form.password2.errors.0 }}</span>
-                {% endif %}
-            </p>
-
-            <button type="submit" class="user-type-btn">Sign Up</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>© 2025 DevProfile Insight. All rights reserved.</p>
+    <footer class="system-footer">
+        <div class="nav-container">
+            <p>© 2025 // DEVPROFILE_INSIGHT // USER_REG</p>
+            <span class="ticker">● READY_FOR_INPUT</span>
+        </div>
     </footer>
-
 </body>
-
 </html>

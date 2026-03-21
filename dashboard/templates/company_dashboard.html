@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevProfile // Company Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/personal_dashboard.css' %}">
+</head>
+
+<body>
+    <div class="blueprint-grid"></div>
+
+    <header class="system-header">
+        <div class="nav-container">
+            <div class="brand-id">SYSTEM://COMPANY_PORTAL</div>
+            <nav class="action-links">
+                <a href="#" class="nav-link active">positions</a>
+                <a href="{% url 'login' %}" class="nav-link">logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-wrapper">
+        <section class="sidebar-panel">
+            <div class="content-box">
+                <div class="box-label">POSITION_MODULE</div>
+                <h3>Create New Position</h3>
+                <p class="small-text">Publish openings that will appear on personal dashboards.</p>
+                <form method="post" class="system-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="create_job">
+                    {{ form.as_p }}
+                    <button type="submit" class="submit-btn">PUBLISH_POSITION</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="main-display">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="content-box status-msg">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+
+            {% if company_jobs %}
+            <div class="display-grid single-column-grid">
+                {% for job in company_jobs %}
+                <div class="content-box wide-box">
+                    <div class="box-label">POSITION_{{ forloop.counter }}</div>
+                    <h4>{{ job.title }}</h4>
+                    <p><strong>Status:</strong> {% if job.is_active %}Active{% else %}Closed{% endif %}</p>
+                    <p><strong>Description:</strong> {{ job.description }}</p>
+                    {% if job.required_skills %}
+                    <p><strong>Required Skills:</strong> {{ job.required_skills }}</p>
+                    {% endif %}
+                    <p><strong>Location:</strong> {{ job.location|default:"Not specified" }}</p>
+                    <form method="post" class="compact-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="delete_job">
+                        <input type="hidden" name="job_id" value="{{ job.id }}">
+                        <button type="submit" class="submit-btn delete-btn">DELETE_POSITION</button>
+                    </form>
+                    <hr>
+                    <h4>Applicants</h4>
+                    {% for application in job.applications.all %}
+                    <div class="terminal-text applicant-card">
+                        <p><strong>User:</strong> {{ application.applicant.username }}</p>
+                        <p><strong>GitHub:</strong> <a href="https://github.com/{{ application.github_username }}"
+                                target="_blank">{{ application.github_username }}</a></p>
+                        {% if application.resume_file %}
+                        <p><strong>Resume:</strong><a href="{{ application.resume_file.url }}" download>Download
+                                Resume</a>
+                        </p> {% endif %}
+                        {% if application.cover_note %}
+                        <p><strong>Cover Note:</strong> {{ application.cover_note }}</p>
+                        {% endif %}
+                        {% if application.company_evaluation %}
+                        <p><strong>Score:</strong> {{ application.company_evaluation.score }}</p>
+                        <p><strong>Pros:</strong> {{ application.company_evaluation.strengths }}</p>
+                        <p><strong>Cons:</strong> {{ application.company_evaluation.weaknesses }}</p>
+                        <!-- <p><strong>Recommendation:</strong> {{ application.company_evaluation.recommendations }}</p> -->
+                        <p><strong>GitHub Insights:</strong> {{ application.company_evaluation.github_summary }}</p>
+                        {% else %}
+                        <p><strong>Profile Insight:</strong> Applicant has not generated analysis yet.</p>
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    <p class="small-text">No applications yet for this position.</p>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="placeholder-box">
+                <div class="loading-spinner"></div>
+                <p>NO_POSITIONS_PUBLISHED_YET</p>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer class="system-footer">
+        <div class="nav-container">
+            <span>STABLE_VERSION_2.0.5</span>
+            <span class="ticker">● COMPANY_CHANNEL_ONLINE // SECURED_PIPELINE</span>
+        </div>
+    </footer>
+</body>
+
+</html>
